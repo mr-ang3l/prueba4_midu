@@ -1,0 +1,54 @@
+### Recuperar todas las películas
+
+GET http://localhost:1234/movies
+
+### Recuperar una película por id
+
+GET http://localhost:1234/movies/8fb17ae1-bdfe-45e5-a871-4772d7e526b8
+
+### Recuperar todas las películas por género
+
+GET http://localhost:1234/movies?genre=acTioN
+
+// El símbolo ? representa a un "query parameter"
+
+### Crear un película con POST
+
+POST http://localhost:1234/movies
+Content-Type: application/json
+
+{
+	"title": "Five Nights At Freddy's",
+	"year": 2023,
+	"director": "Emma Tammi",
+	"duration": 109,
+	"poster": "https://m.media-amazon.com/images/I/71LcVhJz3DL.jpg",
+	"genre": ["Horror"],
+	"rate" : 4
+}
+
+### Crear un película con POST: Error
+
+POST http://localhost:1234/movies
+Content-Type: application/json
+
+{
+	"title": 8,
+	"year": "hola",
+	"director": "Emma Tammi",
+	"duration": 109,
+	"poster": "https://m.media-amazon.com/images/I/71LcVhJz3DL.jpg",
+	"genre": ["Horror"]
+}
+
+### Actualizar una porción de una película ya publicada
+
+PATCH http://localhost:1234/movies/dcdd0fad-a94c-4810-8acc-5f108d3b18c3
+Content-Type: application/json
+
+// la propiedad "id" se ignora porque no está contemplada como un campo a validar en el archivo movies.js, por lo que al no ser incluida es automáticamente descartada como información relevante para nuestra base de datos y no se añade. 
+{
+	"id": "id-inventada-por-un-usuario-queriéndose-hacer-el-hacker",
+	"title": "The Shawshank Redemption",
+	"year": 1994
+}
