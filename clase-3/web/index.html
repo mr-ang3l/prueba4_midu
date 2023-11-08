@@ -36,6 +36,15 @@
 			width: 320px;
 		}
 
+		.error {
+			color: red;
+			height: 100vh;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+		}
+
 		p {
 			padding: 0;
 			margin: 0;
@@ -54,7 +63,7 @@
 
 	</style>
 	<script type="module">
-		fetch('http://localhost:1234/movies')
+		fetch('https://rest-api-deploy-dev-gaxh.2.us-1.fl0.io/movies')
 			.then(res => res.json())
 			.then(movies => {
 				console.log(movies)
@@ -70,6 +79,10 @@
 				}).join('')
 
 				document.querySelector('body').innerHTML = html
+			})
+			.catch((error) => {
+				console.log('No se pudo acceder a la información, pa')
+				document.querySelector('body').innerHTML = `<div class="error"><h1>No se pudo acceder a la información, pa</h1></div>`
 			})
 	</script>
 </head>
