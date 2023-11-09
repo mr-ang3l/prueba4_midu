@@ -1,4 +1,4 @@
-const z = require('zod')
+import z from 'zod'
 
 const movieSchema = z.object({
   title: z.string({
@@ -37,14 +37,12 @@ const movieSchema = z.object({
 
 // Esta función se encargará de validar si un objeto dado es igual al de referencia.
 
-function validateMovie (input) {
+export function validateMovie (input) {
   return movieSchema.safeParse(input)
 }
 
-function validatePartialMovie (input) {
+export function validatePartialMovie (input) {
   // .partial() es un método que convierte a todas las partes de nuestro esquema en opcionales, de esta manera habilitándonos la posibilidad de modificar partes de objetos ya creados en la base de datos.
 
   return movieSchema.partial().safeParse(input)
 }
-
-module.exports = { validateMovie, validatePartialMovie }

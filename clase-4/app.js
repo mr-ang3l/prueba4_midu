@@ -1,15 +1,28 @@
-/* eslint-disable padded-blocks */
-const express = require('express')
-const movies = require('./movies.json')
-const crypto = require('node:crypto')
+// Con ESModules se recomienda siempre añadir la extensión al final del nombre de un archivo a la hora de importarlo.
+
+import express, { json } from 'express'
+import { randomUUID } from 'node:crypto'
+import cors from 'cors'
+import { validateMovie, validatePartialMovie } from './schemas/movies.js'
+
+// import movies from './movies.json' assert { type: 'json' } -- Esta sintaxis no existe (assert). No se recomienda su uso pues quedará sin soporte.
+// import movies from './movies.json' with { type: 'json' } -- Esta sintaxis sigue en etapa experimental (with).
+
+// import fs from 'node:fs'
+// const movies = JSON.parse(fs.readFileSync('./movies.json', 'utf-8')) -- Este sería una tercera opción válida y vigente en archivos con ES Modules. El único problema con este método es que es lento.
+
+// Método más recomendado actualmente para importar archivos .JSON con ES Modules actualmente:
+
+import { createRequire } from 'node:module'
+const require = createRequire(import.meta.url)
+const movies = require('./movies.json') // Se recomienda este método ya que este módulo de Node cuenta con ya con todo el procesamiento necesario precargado para leer un JSON.
+
 const app = express()
-const cors = require('cors')
-const { validateMovie, validatePartialMovie } = require('./schemas/movies')
 const PORT = process.env.PORT ?? 1234
 
 app.disable('x-powered-by')
 
-app.use(express.json())
+app.use(json())
 
 app.use(cors({
   origin: (origin, callback) => {
@@ -73,7 +86,7 @@ app.post('/movies', (req, res) => {
   }
 
   const newMovie = {
-    id: crypto.randomUUID(),
+    id: randomUUID(),
     ...result.data
   }
 
