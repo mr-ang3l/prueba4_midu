@@ -1,12 +1,7 @@
 // Router es una clase de Express que crea un enrutador para gestionar las rutas de tu API o app:
 import { Router } from 'express'
-
-import { randomUUID } from 'node:crypto'
-import { readJSON } from '../utils'
 import { validateMovie, validatePartialMovie } from '../schemas/movies.js'
 import { MovieModel } from '../models/movie.js'
-
-const movies = readJSON('./movies.json')
 const moviesRouter = Router()
 
 // Aquí dejamos de incluir en el nombre de la rutas la palabra 'movies' porque el nombre de este archivo en sí (movies) está ya representando esa sección de la app, gracias a la clase Router de Express.
