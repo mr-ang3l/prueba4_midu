@@ -40,22 +40,17 @@ moviesRouter.post('/', async (req, res) => {
 
   const newMovie = await MovieModel.create({ input: result.data })
 
-  // Esto no sería REST, porque estamos guardando
-  // el estado de la aplicación en memoria
-
-  movies.push(newMovie)
-
   res.status(201).json(newMovie)
 })
 
-// Eliminar una objeto/ película 
+// Eliminar una objeto/ película.
 
 moviesRouter.delete('/:id', async (req, res) => {
   const { id } = req.params
 
   const result = await MovieModel.delete({ id })
 
-  if (movieIndex === false) {
+  if (result === false) {
     return res.status(404).json({ message: 'Movie not found' })
   }
 
