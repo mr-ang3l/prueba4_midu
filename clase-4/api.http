@@ -8,7 +8,7 @@ GET http://localhost:1234/movies/8fb17ae1-bdfe-45e5-a871-4772d7e526b8
 
 ### Recuperar todas las películas por género
 
-GET http://localhost:1234/movies?genre=acTioN
+GET http://localhost:1234/movies?genre=drama
 
 // El símbolo ? representa a un "query parameter"
 

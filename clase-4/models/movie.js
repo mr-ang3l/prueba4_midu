@@ -1,7 +1,7 @@
-import { readJSON } from './../utils.js'
+import { readJSON } from '../utils.js'
 import { randomUUID } from 'node:crypto'
 
-const movies = readJSON('./../movies.json')
+const movies = readJSON('./movies.json')
 
 export class MovieModel {
   // Pensando en futuros escenarios (JSONs locales y externos) declararemos cada función como tipo asíncrona.
@@ -12,8 +12,10 @@ export class MovieModel {
         movie => movie.genre.some(g => g.toLowerCase() === genre.toLowerCase())
       )
 
-      return res.json(filteredMovies)
+      return filteredMovies
     }
+
+    return movies
   }
 
   static async getById ({ id }) {
@@ -59,6 +61,6 @@ export class MovieModel {
       ...input
     }
 
-    return movies[movieIndex] 
+    return movies[movieIndex]
   }
 }
