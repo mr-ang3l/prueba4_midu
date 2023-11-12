@@ -1,6 +1,6 @@
 // Este es el código que actúa como intermediario entre el la Vista y los Modelos (documentos de código especializados en una tarea) enviando cada petición a su respectivo lugar de procesamiento.
 
-import { MovieModel } from '../models/movie.js'
+import { MovieModel } from '../models/local-file-system/movie.js'
 import { validateMovie, validatePartialMovie } from '../schemas/movies.js'
 
 export class MovieController {
